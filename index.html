@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             margin: 50px;
             background-color: dimgray;
         }
+
         .container {
             background-color: aliceblue;
             max-width: 400px;
@@ -21,16 +23,26 @@
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             align-items: center;
         }
+
         .logo {
-            align-items:baseline;
+            align-items: baseline;
             max-width: 80px;
             margin-bottom: 20px;
             margin-right: 10000px;
+
+            @media screen and (min-width: 200px) and (max-width: 400px) {
+                height: 40px;
+                width: 35px;
+                margin-bottom: 40px;
+                margin-top: -15px;
+            }
         }
-        .h2Taxt{
+
+        .h2Taxt {
             text-align: center;
             margin-top: -50px;
         }
+
         input {
             width: 90%;
             padding: 10px;
@@ -38,6 +50,7 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+
         button {
             padding: 10px 20px;
             background-color: #28a745;
@@ -46,20 +59,29 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #218838;
         }
+
         .result {
             text-align: left;
             margin-top: 20px;
         }
+        .h2Taxt{
+            @media screen and (min-width: 200px) and (max-width: 400px) {
+                margin-left: 15px;
+                font-size: 10px;
+margin-top: -60px;            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
         <!-- Agency Logo -->
         <img src="img/logo.png" alt="Agency Logo" class="logo">
-        
+
         <h2 class="h2Taxt">Fare Calculator</h2>
         <input type="number" id="baseFare" placeholder="Enter Base Fare">
         <input type="number" id="tax" placeholder="Enter Tax">
@@ -69,7 +91,7 @@
         <input type="number" id="nonrefundableTax" placeholder="Enter Nonrefundable Tax">
         <input type="number" id="agencyPaidAmount" placeholder="Enter Agency Paid Amount">
         <button onclick="calculateFare()">Calculate</button>
-        
+
         <div class="result">
             <h3>Calculation Breakdown:</h3>
             <p>Base Fare: <span id="originalFare">0</span> BDT</p>
@@ -80,7 +102,7 @@
             <p>Service Charge: <span id="serviceChargeValue">0</span> BDT</p>
             <p>Nonrefundable Tax: <span id="nonrefundableTaxValue">0</span> BDT</p>
             <h3>Total Fare: <span id="totalFare">0</span> BDT</h3>
-            <h3>Remaining Amount to Agency: <span id="remainingAmount">0</span> BDT</h3>
+            <h3>We will pay to the Agency: <span id="remainingAmount">0</span> BDT</h3>
         </div>
     </div>
 
@@ -93,13 +115,13 @@
             let serviceCharge = parseFloat(document.getElementById("serviceCharge").value) || 0;
             let nonrefundableTax = parseFloat(document.getElementById("nonrefundableTax").value) || 0;
             let agencyPaidAmount = parseFloat(document.getElementById("agencyPaidAmount").value) || 0;
-            
+
             let discountedFare = baseFare * 0.93; // Apply 7% discount
             let totalFare = discountedFare + tax + penalty + ait + serviceCharge;
-            
+
             // Deduct the nonrefundable tax from the total fare
-            totalFare -= nonrefundableTax;
-            
+            totalFare += nonrefundableTax;
+
             // Calculate the remaining amount the agency needs to pay
             let remainingAmount = totalFare - agencyPaidAmount;
 
@@ -115,4 +137,5 @@
         }
     </script>
 </body>
+
 </html>
