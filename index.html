@@ -135,11 +135,13 @@
 
             let noteMessage = "";
 
-            // If negative, agency will only get refundable tax
             if (remainingAmount < 0) {
-                remainingAmount = tax - nonrefundableTax;
-                if (remainingAmount < 0) remainingAmount = 0;
+                // When negative → no amount shown, only note
+                document.getElementById("remainingAmount").textContent = "";
                 noteMessage = "Only tax refund applicable.";
+            } else {
+                // Normal case → show amount
+                document.getElementById("remainingAmount").textContent = remainingAmount.toFixed(2);
             }
 
             document.getElementById("originalFare").textContent = baseFare.toFixed(2);
@@ -150,7 +152,6 @@
             document.getElementById("serviceChargeValue").textContent = serviceCharge.toFixed(2);
             document.getElementById("nonrefundableTaxValue").textContent = nonrefundableTax.toFixed(2);
             document.getElementById("totalFare").textContent = totalFare.toFixed(2);
-            document.getElementById("remainingAmount").textContent = remainingAmount.toFixed(2);
             document.getElementById("note").textContent = noteMessage;
         }
     </script>
